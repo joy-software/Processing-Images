@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html  xmlns='http://www.w3.org/1999/xhtml'>    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Orange</title>
+
+	<style type="text/css" title="currentStyle">
+	    @import "/general.css";
+	</style>
+
+	<script type="text/javascript">
+	    function extractUrlParams()
+	    {
+		var t = location.search.substring(1).split('&');
+		var f = [];
+
+		for (var i=0; i<t.length; i++)
+		{
+		    var x = t[ i ].split('=');
+		    f[x[0]]=x[1];
+		}
+		return f;
+	    }
+
+
+	    Object.size = function(obj) {
+		var size = 0, key;
+		for (key in obj) {
+		    if (obj.hasOwnProperty(key)) size++;
+		}
+		return size;
+	    };
+
+	    function setLocale(locale)
+	    {
+		if(location.search=="")
+		    document.getElementById('setLang').action = window.location.pathname+"?locale="+locale;
+		else
+		{
+		    var params = extractUrlParams();
+		    params["locale"] = locale;
+		    document.getElementById('setLang').action = window.location.pathname+params2url(params);
+		}
+		document.getElementById('setLang').submit();
+	    }
+
+	    function params2url(params)
+	    {
+		var url="";
+		if(Object.size(params))
+		{
+		    var init=0;
+
+		    for (var i in params )
+		    {
+			if(!init)
+			{
+			    init=1;
+			    url += "?"+i+('=')+params[i];
+			}
+			else url += "&"+i+('=')+params[i];
+		    }
+		}
+		return url;
+	    }
+	</script>
+    </head>
+    
+    <body bgcolor="#ffffff" text="#000000">
+
+        <div class="header">
+            <div class="bandeau1">
+                <div class="sellang">
+                    <div class='langflagsfr' onclick="setLocale('fr-FR')"></div><div class='langflagsen' onclick="setLocale('en-FR')"></div>                </div>
+                <div class="logohdr"></div>
+            </div>
+            <div class="bandeau2"></div>
+            <div class="bandeau3">
+                <div align="left" id="btn_grey_my_acnt" class="btn_grey_my_acnt">
+                    <a onclick="setDisp('my_pass');">
+                        mon compte                    </a>
+                </div>
+            </div>
+        </div>
+
+	<div id="container" style="position:relative">
+            <font style="font-size: 12px;" color="#000000" face="Arial"><b>
+				Cher client, naviguez maintenant en achetant votre pass Internet. Cliquez sur le lien ci-dessous pour vous connecter sur votre espace personnel.<br><br>				Avec votre espace personnel vous pourrez  : <br>- Acheter un Pass Internet <br>- Suivre la consommation de vos pass <br>- Recharger votre compte principal avec une carte de recharge<br>- Suivre la consommation de votre compte principal <br>- Renseigner vos informations personnelles <br><br>Pour rejoindre votre espace personnel&nbsp;:
+				<a href='https://webtopocam.orange.com/cameroun/roar?warning=enable'>mon compte</a>
+                <br><br>Orange vous remercie.<br>            </b></font>
+	</div>
+
+        <form id='setLang' method=POST>
+            <input type="hidden" name="page" id="page">
+        </form>
+    </body>
+</html>
+
